@@ -1,0 +1,513 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// AUTHENTICATION & USER MANAGEMENT
+// ============================================================================
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  role          UserRole  @default(FOUNDER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  accounts              Account[]
+  sessions              Session[]
+  startups              Startup[]
+  cofounderInvites      CofounderInvite[]
+  tasks                 Task[]
+  aiConversations       AIConversation[]
+  mentalHealthSessions  MentalHealthSession[]
+  networkConnections    NetworkConnection[]     @relation("UserConnections")
+  receivedConnections   NetworkConnection[]     @relation("ReceivedConnections")
+  notifications         Notification[]
+  financialTransactions FinancialTransaction[]
+  legalDocuments        LegalDocument[]
+}
+
+enum UserRole {
+  FOUNDER
+  COFOUNDER
+  ADMIN
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ============================================================================
+// STARTUP MANAGEMENT
+// ============================================================================
+
+model Startup {
+  id          String        @id @default(cuid())
+  name        String
+  description String?
+  industry    String?
+  stage       StartupStage  @default(IDEA)
+  foundedDate DateTime?
+  website     String?
+  logo        String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  // Relations
+  founderId String
+  founder   User   @relation(fields: [founderId], references: [id])
+
+  cofounders            CofounderInvite[]
+  legalDocuments        LegalDocument[]
+  financialTransactions FinancialTransaction[]
+  marketingCampaigns    MarketingCampaign[]
+  products              Product[]
+  aiContext             AIContext?
+}
+
+enum StartupStage {
+  IDEA
+  MVP
+  EARLY_STAGE
+  GROWTH
+  SCALING
+  MATURE
+}
+
+model CofounderInvite {
+  id        String             @id @default(cuid())
+  email     String
+  role      String
+  equity    Float?
+  status    InviteStatus       @default(PENDING)
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+
+  startupId String
+  startup   Startup @relation(fields: [startupId], references: [id])
+
+  invitedById String
+  invitedBy   User   @relation(fields: [invitedById], references: [id])
+}
+
+enum InviteStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  EXPIRED
+}
+
+// ============================================================================
+// AI CONTEXT ENGINE (FOUNDER TWIN)
+// ============================================================================
+
+model AIContext {
+  id               String   @id @default(cuid())
+  businessModel    String?
+  targetMarket     String?
+  competitors      String[]
+  challenges       String[]
+  goals            String[]
+  preferences      Json?
+  learningData     Json?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  startupId String  @unique
+  startup   Startup @relation(fields: [startupId], references: [id])
+}
+
+model AIConversation {
+  id        String   @id @default(cuid())
+  messages  Json[]
+  context   Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+// ============================================================================
+// LEGAL & COMPLIANCE MODULE
+// ============================================================================
+
+model LegalDocument {
+  id           String       @id @default(cuid())
+  title        String
+  type         DocumentType
+  content      String?
+  fileUrl      String?
+  status       DocStatus    @default(DRAFT)
+  jurisdiction String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  startupId String
+  startup   Startup @relation(fields: [startupId], references: [id])
+
+  createdById String
+  createdBy   User   @relation(fields: [createdById], references: [id])
+}
+
+enum DocumentType {
+  NDA
+  EMPLOYMENT_CONTRACT
+  SHAREHOLDER_AGREEMENT
+  TERMS_OF_SERVICE
+  PRIVACY_POLICY
+  CONTRACTOR_AGREEMENT
+  INCORPORATION_DOCS
+  IP_ASSIGNMENT
+  OTHER
+}
+
+enum DocStatus {
+  DRAFT
+  PENDING_REVIEW
+  APPROVED
+  SIGNED
+  ARCHIVED
+}
+
+model ComplianceTask {
+  id          String         @id @default(cuid())
+  title       String
+  description String?
+  dueDate     DateTime?
+  priority    Priority       @default(MEDIUM)
+  status      TaskStatus     @default(PENDING)
+  category    String?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+// ============================================================================
+// FINANCIAL MANAGEMENT MODULE
+// ============================================================================
+
+model FinancialTransaction {
+  id          String            @id @default(cuid())
+  amount      Float
+  currency    String            @default("USD")
+  type        TransactionType
+  category    String?
+  description String?
+  date        DateTime          @default(now())
+  receiptUrl  String?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  startupId String
+  startup   Startup @relation(fields: [startupId], references: [id])
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+  INVESTMENT
+  LOAN
+  REFUND
+}
+
+model FinancialGoal {
+  id          String   @id @default(cuid())
+  title       String
+  targetAmount Float
+  currentAmount Float   @default(0)
+  deadline    DateTime?
+  achieved    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model FundraisingRound {
+  id          String        @id @default(cuid())
+  roundType   RoundType
+  targetAmount Float
+  raisedAmount Float        @default(0)
+  valuation   Float?
+  status      RoundStatus   @default(PLANNING)
+  startDate   DateTime?
+  endDate     DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+enum RoundType {
+  BOOTSTRAP
+  FRIENDS_FAMILY
+  SEED
+  SERIES_A
+  SERIES_B
+  SERIES_C
+  SERIES_D_PLUS
+}
+
+enum RoundStatus {
+  PLANNING
+  ACTIVE
+  CLOSED
+  CANCELLED
+}
+
+// ============================================================================
+// MARKETING & ANALYTICS MODULE
+// ============================================================================
+
+model MarketingCampaign {
+  id          String         @id @default(cuid())
+  name        String
+  description String?
+  channel     MarketingChannel
+  budget      Float?
+  spent       Float          @default(0)
+  startDate   DateTime?
+  endDate     DateTime?
+  status      CampaignStatus @default(DRAFT)
+  metrics     Json?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  startupId String
+  startup   Startup @relation(fields: [startupId], references: [id])
+}
+
+enum MarketingChannel {
+  SOCIAL_MEDIA
+  EMAIL
+  CONTENT
+  SEO
+  PAID_ADS
+  INFLUENCER
+  PR
+  EVENTS
+  OTHER
+}
+
+enum CampaignStatus {
+  DRAFT
+  SCHEDULED
+  ACTIVE
+  PAUSED
+  COMPLETED
+  CANCELLED
+}
+
+model Analytics {
+  id        String   @id @default(cuid())
+  date      DateTime @default(now())
+  visitors  Int      @default(0)
+  pageviews Int      @default(0)
+  signups   Int      @default(0)
+  revenue   Float    @default(0)
+  metrics   Json?
+  createdAt DateTime @default(now())
+}
+
+// ============================================================================
+// PRODUCT MANAGEMENT
+// ============================================================================
+
+model Product {
+  id          String        @id @default(cuid())
+  name        String
+  description String?
+  status      ProductStatus @default(IDEA)
+  launchDate  DateTime?
+  website     String?
+  features    Json?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  startupId String
+  startup   Startup @relation(fields: [startupId], references: [id])
+
+  feedback UserFeedback[]
+}
+
+enum ProductStatus {
+  IDEA
+  DEVELOPMENT
+  BETA
+  LAUNCHED
+  DISCONTINUED
+}
+
+model UserFeedback {
+  id        String   @id @default(cuid())
+  rating    Int?
+  comment   String?
+  category  String?
+  createdAt DateTime @default(now())
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+// ============================================================================
+// TASK & PROJECT MANAGEMENT
+// ============================================================================
+
+model Task {
+  id          String     @id @default(cuid())
+  title       String
+  description String?
+  priority    Priority   @default(MEDIUM)
+  status      TaskStatus @default(PENDING)
+  dueDate     DateTime?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum TaskStatus {
+  PENDING
+  IN_PROGRESS
+  BLOCKED
+  COMPLETED
+  CANCELLED
+}
+
+// ============================================================================
+// MENTAL HEALTH & WELLNESS
+// ============================================================================
+
+model MentalHealthSession {
+  id        String   @id @default(cuid())
+  mood      Int      // 1-10 scale
+  stress    Int      // 1-10 scale
+  notes     String?
+  insights  Json?
+  createdAt DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model WellnessGoal {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  frequency   String?  // daily, weekly, monthly
+  completed   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ============================================================================
+// NETWORKING & CONNECTIONS
+// ============================================================================
+
+model NetworkConnection {
+  id        String           @id @default(cuid())
+  type      ConnectionType
+  status    ConnectionStatus @default(PENDING)
+  message   String?
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  userId    String
+  user      User   @relation("UserConnections", fields: [userId], references: [id])
+
+  connectedUserId String
+  connectedUser   User   @relation("ReceivedConnections", fields: [connectedUserId], references: [id])
+}
+
+enum ConnectionType {
+  COFOUNDER
+  MENTOR
+  INVESTOR
+  PEER
+  ADVISOR
+}
+
+enum ConnectionStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  BLOCKED
+}
+
+// ============================================================================
+// NOTIFICATIONS
+// ============================================================================
+
+model Notification {
+  id        String           @id @default(cuid())
+  title     String
+  message   String
+  type      NotificationType
+  read      Boolean          @default(false)
+  actionUrl String?
+  createdAt DateTime         @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+enum NotificationType {
+  INFO
+  WARNING
+  SUCCESS
+  ERROR
+  REMINDER
+  ALERT
+}
+
