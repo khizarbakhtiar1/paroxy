@@ -151,13 +151,8 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for deta
 
 ## License
 
-This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License
 
-## Support
-
-- Documentation: [docs.paroxy.io](https://docs.paroxy.io)
-- Discord: [Join our community](https://discord.gg/paroxy)
-- Email: support@paroxy.io
 
 ## Roadmap
 
