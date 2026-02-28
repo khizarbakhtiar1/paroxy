@@ -120,7 +120,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t bg-white py-8">
         <div className="container mx-auto px-4 text-center text-gray-600">
-          <p>© 2025 PAROXY. Built with ❤️ for founders, by founders.</p>
+          <p>© {new Date().getFullYear()} PAROXY. Built with ❤️ for founders, by founders.</p>
         </div>
       </footer>
     </div>

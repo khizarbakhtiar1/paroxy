@@ -1,6 +1,7 @@
 "use client";
 
 import { signOut } from "next-auth/react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Bell, Search, LogOut } from "lucide-react";
 
@@ -44,9 +45,11 @@ export default function DashboardHeader({ user }: DashboardHeaderProps) {
             <p className="text-xs text-gray-500">{user.email}</p>
           </div>
           {user.image ? (
-            <img
+            <Image
               src={user.image}
               alt={user.name || "User"}
+              width={40}
+              height={40}
               className="h-10 w-10 rounded-full"
             />
           ) : (

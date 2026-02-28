@@ -32,8 +32,8 @@ export async function POST(req: Request) {
           stage: startup.stage,
           businessModel: startup.aiContext.businessModel || undefined,
           targetMarket: startup.aiContext.targetMarket || undefined,
-          challenges: startup.aiContext.challenges,
-          goals: startup.aiContext.goals,
+          challenges: JSON.parse(startup.aiContext.challenges || "[]") as string[],
+          goals: JSON.parse(startup.aiContext.goals || "[]") as string[],
         }
       : undefined;
 
@@ -44,11 +44,11 @@ export async function POST(req: Request) {
     await prisma.aIConversation.create({
       data: {
         userId: session.user.id,
-        messages: [
+        messages: JSON.stringify([
           ...messages,
           { role: "assistant", content: response },
-        ],
-        context: context || {},
+        ]),
+        context: context ? JSON.stringify(context) : null,
       },
     });
 

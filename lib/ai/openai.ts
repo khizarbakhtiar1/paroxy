@@ -150,7 +150,7 @@ export async function analyzeDocument(
 
 export async function generateLegalDocument(
   documentType: string,
-  params: Record<string, any>
+  params: Record<string, unknown>
 ): Promise<string> {
   try {
     const prompt = `Generate a professional ${documentType} with the following parameters:

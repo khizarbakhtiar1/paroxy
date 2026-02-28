@@ -68,7 +68,7 @@ export default function AddTransactionPage() {
       }
 
       router.push("/dashboard/financial");
-    } catch (err) {
+    } catch (_err) {
       setError("Failed to add transaction. Please try again.");
     } finally {
       setLoading(false);

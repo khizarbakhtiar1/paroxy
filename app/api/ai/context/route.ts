@@ -3,7 +3,7 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db/prisma";
 import { generateInsights } from "@/lib/ai/openai";
 
-export async function GET(req: Request) {
+export async function GET(_req: Request) {
   try {
     const session = await auth();
     if (!session?.user) {
@@ -61,19 +61,19 @@ export async function POST(req: Request) {
       update: {
         businessModel: data.businessModel,
         targetMarket: data.targetMarket,
-        competitors: data.competitors || [],
-        challenges: data.challenges || [],
-        goals: data.goals || [],
-        preferences: data.preferences || {},
+        competitors: JSON.stringify(data.competitors || []),
+        challenges: JSON.stringify(data.challenges || []),
+        goals: JSON.stringify(data.goals || []),
+        preferences: data.preferences ? JSON.stringify(data.preferences) : null,
       },
       create: {
         startupId: startup.id,
         businessModel: data.businessModel,
         targetMarket: data.targetMarket,
-        competitors: data.competitors || [],
-        challenges: data.challenges || [],
-        goals: data.goals || [],
-        preferences: data.preferences || {},
+        competitors: JSON.stringify(data.competitors || []),
+        challenges: JSON.stringify(data.challenges || []),
+        goals: JSON.stringify(data.goals || []),
+        preferences: data.preferences ? JSON.stringify(data.preferences) : null,
       },
     });
 
@@ -87,7 +87,7 @@ export async function POST(req: Request) {
   }
 }
 
-export async function PUT(req: Request) {
+export async function PUT(_req: Request) {
   try {
     const session = await auth();
     if (!session?.user) {
@@ -113,8 +113,8 @@ export async function PUT(req: Request) {
       stage: startup.stage,
       businessModel: startup.aiContext.businessModel || undefined,
       targetMarket: startup.aiContext.targetMarket || undefined,
-      challenges: startup.aiContext.challenges,
-      goals: startup.aiContext.goals,
+      challenges: JSON.parse(startup.aiContext.challenges || "[]") as string[],
+      goals: JSON.parse(startup.aiContext.goals || "[]") as string[],
     });
 
     return NextResponse.json({ insights });

@@ -81,7 +81,7 @@ export default function GenerateDocumentPage() {
 
       const data = await response.json();
       router.push(`/dashboard/legal/document/${data.id}`);
-    } catch (err) {
+    } catch (_err) {
       setError("Failed to generate document. Please try again.");
     } finally {
       setLoading(false);
