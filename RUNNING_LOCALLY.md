@@ -1,8 +1,8 @@
-# 🎯 PAROXY - Running Locally
+# PAROXY - Running Locally
 
 ## Quick Setup (3 Options)
 
-### ✅ Option 1: Free Cloud Database (Recommended - Easiest)
+### Option 1: Free Cloud Database (Recommended - Easiest)
 
 **Use Neon (Free PostgreSQL in the cloud)**
 

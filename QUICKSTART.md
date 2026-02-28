@@ -1,4 +1,4 @@
-# 🚀 PAROXY - Quick Start Guide
+# PAROXY - Quick Start Guide
 
 Get PAROXY running in 5 minutes!
 
@@ -54,7 +54,7 @@ npx prisma generate
 npm run dev
 ```
 
-Open **http://localhost:3000** 🎉
+Open **http://localhost:3000** 
 
 ## First Steps in the App
 
@@ -131,7 +131,7 @@ PORT=3001 npm run dev
 
 ## What's Included?
 
-✅ **10+ Feature Modules**
+ **10+ Feature Modules**
 - Legal & Compliance
 - Financial Management  
 - Marketing & Analytics
@@ -143,18 +143,18 @@ PORT=3001 npm run dev
 - Settings
 - And more!
 
-✅ **AI-Powered Everything**
+ **AI-Powered Everything**
 - Document generation
 - Financial insights
 - Marketing suggestions
 - Business recommendations
 
-✅ **Beautiful UI**
+ **Beautiful UI**
 - Modern, responsive design
 - Dark mode ready
 - Mobile optimized
 
-✅ **Developer Friendly**
+ **Developer Friendly**
 - TypeScript
 - Prisma ORM
 - Modular architecture
@@ -162,12 +162,12 @@ PORT=3001 npm run dev
 
 ## Need Help?
 
-📖 **Full Documentation**
+ **Full Documentation**
 - [DEVELOPMENT.md](DEVELOPMENT.md) - Complete setup guide
 - [DEPLOYMENT.md](DEPLOYMENT.md) - Production deployment
 - [CONTRIBUTING.md](CONTRIBUTING.md) - Contributing guide
 
-💬 **Support**
+ **Support**
 - GitHub Issues
 - Discord Community
 - Email: support@paroxy.io
@@ -192,7 +192,7 @@ Once you're up and running:
    - Deploy to Vercel in 5 minutes
    - Use Neon for database hosting
 
-## Pro Tips 💡
+## Pro Tips 
 
 - The AI gets smarter as you add more data
 - Set up notifications for important deadlines
@@ -202,7 +202,5 @@ Once you're up and running:
 
 ---
 
-**Ready to build your dream?** Let's go! 🚀
-
-*Built with ❤️ for founders, by founders.*
+**Ready to build your dream?** Let's go!
 

@@ -234,5 +234,5 @@ Contributors will be:
 - Credited in release notes
 - Mentioned in project documentation
 
-Thank you for making PAROXY better! 🚀
+Thank you for making PAROXY better! 
 

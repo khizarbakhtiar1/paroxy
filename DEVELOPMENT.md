@@ -280,5 +280,3 @@ For issues or questions:
 
 ---
 
-Built with ❤️ for founders, by founders.
-

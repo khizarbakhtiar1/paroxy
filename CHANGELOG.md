@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.0] - 2025-12-06
 
-### Added - Initial Release 🚀
+### Added - Initial Release 
 
 #### Core Platform
 - **Project initialization** with Next.js 15, TypeScript, and Tailwind CSS

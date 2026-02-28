@@ -283,5 +283,5 @@ For deployment issues:
 
 ---
 
-**Congratulations!** 🎉 Your PAROXY instance is now live and ready to help founders succeed!
+**Congratulations!**  Your PAROXY instance is now live and ready to help founders succeed!
 

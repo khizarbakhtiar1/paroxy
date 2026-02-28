@@ -1,10 +1,10 @@
-# PAROXY 🚀
+# PAROXY 
 
 **The Ultimate Operating System for Solo Founders & Entrepreneurs**
 
 PAROXY is an AI-powered, all-in-one platform that solves every challenge founders face—from legal compliance to financial management, marketing, team coordination, and mental health support.
 
-## 🎯 Vision
+## Vision
 
 Most founders struggle with their first (or even subsequent) startups, facing challenges in:
 - Legal & Compliance
@@ -20,7 +20,7 @@ Most founders struggle with their first (or even subsequent) startups, facing ch
 
 PAROXY brings all solutions under one roof with an AI "Founder Twin" that learns your business and proactively helps you succeed.
 
-## ✨ Key Features
+## Key Features
 
 ### 1. AI-Powered Founder Twin
 - Context-aware AI that learns your business model, industry, and goals
@@ -56,7 +56,7 @@ PAROXY brings all solutions under one roof with an AI "Founder Twin" that learns
 - Mentor matching
 - Peer learning groups
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend:** Next.js 15, React 19, TypeScript
 - **Styling:** Tailwind CSS, shadcn/ui
@@ -68,7 +68,7 @@ PAROXY brings all solutions under one roof with an AI "Founder Twin" that learns
 - **Deployment:** Vercel
 - **Real-time:** WebSockets, Pusher
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -100,7 +100,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 paroxy/
@@ -122,7 +122,7 @@ paroxy/
 └── types/                # TypeScript types
 ```
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Run unit tests
@@ -135,7 +135,7 @@ npm run test:e2e
 npm run test:coverage
 ```
 
-## 📦 Modules
+## Modules
 
 - **Legal Module:** Document generation, compliance tracking
 - **Financial Module:** Bookkeeping, cash flow, fundraising
@@ -145,21 +145,21 @@ npm run test:coverage
 - **Mental Health:** Wellness tracking, therapy AI
 - **Networking:** Matching algorithms, introductions
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
 
-## 💬 Support
+## Support
 
 - Documentation: [docs.paroxy.io](https://docs.paroxy.io)
 - Discord: [Join our community](https://discord.gg/paroxy)
 - Email: support@paroxy.io
 
-## 🗺️ Roadmap
+## Roadmap
 
 - [x] Project initialization
 - [ ] Authentication system
@@ -173,6 +173,4 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file for
 - [ ] Networking platform
 
 ---
-
-Built with ❤️ for founders, by founders.
 
