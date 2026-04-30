@@ -90,5 +90,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - [x] AI Assistant
 - [x] Marketing module
 - [x] Team management
-- [ ] Mental health features
+- [x] Mental health features
 - [ ] Networking platform
