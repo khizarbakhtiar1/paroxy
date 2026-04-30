@@ -85,7 +85,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - [x] Project initialization
 - [x] Authentication system
 - [x] Dashboard UI
-- [ ] Legal module
+- [x] Legal module
 - [ ] Financial module
 - [ ] AI Assistant
 - [ ] Marketing module
