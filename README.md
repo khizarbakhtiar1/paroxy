@@ -83,7 +83,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Roadmap
 
 - [x] Project initialization
-- [ ] Authentication system
+- [x] Authentication system
 - [ ] Dashboard UI
 - [ ] Legal module
 - [ ] Financial module
