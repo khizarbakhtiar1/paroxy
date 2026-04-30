@@ -79,3 +79,16 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 - Documentation: [docs.paroxy.io](https://docs.paroxy.io)
 - Contact: support@paroxy.io
+
+## Roadmap
+
+- [x] Project initialization
+- [ ] Authentication system
+- [ ] Dashboard UI
+- [ ] Legal module
+- [ ] Financial module
+- [ ] AI Assistant
+- [ ] Marketing module
+- [ ] Team management
+- [ ] Mental health features
+- [ ] Networking platform
