@@ -89,6 +89,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - [x] Financial module
 - [x] AI Assistant
 - [x] Marketing module
-- [ ] Team management
+- [x] Team management
 - [ ] Mental health features
 - [ ] Networking platform
