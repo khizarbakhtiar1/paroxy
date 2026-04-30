@@ -15,15 +15,15 @@ interface DashboardHeaderProps {
 
 export default function DashboardHeader({ user }: DashboardHeaderProps) {
   return (
-    <header className="flex h-16 items-center justify-between border-b bg-white px-6">
+    <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4 md:px-6">
       {/* Search */}
       <div className="flex flex-1 items-center">
-        <div className="relative w-96">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+        <div className="relative w-full max-w-sm">
+          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <input
-            type="text"
-            placeholder="Search anything..."
-            className="w-full rounded-lg border border-gray-200 bg-gray-50 py-2 pl-10 pr-4 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+            type="search"
+            placeholder="Search documents, people, or settings..."
+            className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 pl-9"
           />
         </div>
       </div>
@@ -31,45 +31,47 @@ export default function DashboardHeader({ user }: DashboardHeaderProps) {
       {/* Right side */}
       <div className="flex items-center space-x-4">
         {/* Notifications */}
-        <button className="relative rounded-lg p-2 hover:bg-gray-100">
-          <Bell className="h-5 w-5 text-gray-600" />
-          <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-red-500"></span>
-        </button>
+        <Button variant="ghost" size="icon" className="relative group">
+          <Bell className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+          <span className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-primary/80 ring-2 ring-background"></span>
+        </Button>
 
-        {/* User menu */}
-        <div className="flex items-center space-x-3">
-          <div className="text-right">
-            <p className="text-sm font-medium text-gray-900">
-              {user.name || "User"}
-            </p>
-            <p className="text-xs text-gray-500">{user.email}</p>
+        <div className="h-4 w-px bg-border hidden sm:block"></div>
+
+        {/* User menu & Avatar */}
+        <div className="flex items-center space-x-3 cursor-pointer group hover:opacity-80 transition-opacity">
+          <div className="hidden flex-col items-end md:flex">
+            <span className="text-sm font-medium leading-none">{user.name || "Founder"}</span>
+            <span className="text-xs text-muted-foreground leading-none mt-1">{user.email}</span>
           </div>
-          {user.image ? (
-            <Image
-              src={user.image}
-              alt={user.name || "User"}
-              width={40}
-              height={40}
-              className="h-10 w-10 rounded-full"
-            />
-          ) : (
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-purple-600 text-white">
-              {user.name?.[0]?.toUpperCase() || "U"}
-            </div>
-          )}
+          <div className="h-8 w-8 rounded-full border bg-muted flex items-center justify-center overflow-hidden">
+            {user.image ? (
+              <Image
+                src={user.image}
+                alt={user.name || "User"}
+                width={32}
+                height={32}
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <span className="text-xs font-semibold text-muted-foreground group-hover:text-foreground transition-colors">
+                {user.name?.[0]?.toUpperCase() || "F"}
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Sign out */}
         <Button
-          variant="ghost"
-          size="icon"
+          variant="outline"
+          size="sm"
+          className="ml-2 hidden sm:flex text-xs h-8 px-3"
           onClick={() => signOut({ callbackUrl: "/" })}
-          title="Sign out"
         >
-          <LogOut className="h-5 w-5 text-gray-600" />
+          <LogOut className="mr-2 h-3.5 w-3.5" />
+          Sign out
         </Button>
       </div>
     </header>
   );
 }
-

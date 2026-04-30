@@ -17,76 +17,36 @@ import {
 } from "lucide-react";
 
 const navItems = [
-  {
-    title: "Overview",
-    href: "/dashboard",
-    icon: LayoutDashboard,
-  },
-  {
-    title: "Legal & Compliance",
-    href: "/dashboard/legal",
-    icon: Scale,
-  },
-  {
-    title: "Financial",
-    href: "/dashboard/financial",
-    icon: DollarSign,
-  },
-  {
-    title: "Marketing",
-    href: "/dashboard/marketing",
-    icon: TrendingUp,
-  },
-  {
-    title: "Team",
-    href: "/dashboard/team",
-    icon: Users,
-  },
-  {
-    title: "AI Assistant",
-    href: "/dashboard/ai",
-    icon: MessageSquare,
-  },
-  {
-    title: "Mental Health",
-    href: "/dashboard/wellness",
-    icon: Brain,
-  },
-  {
-    title: "Network",
-    href: "/dashboard/network",
-    icon: Network,
-  },
-  {
-    title: "Notifications",
-    href: "/dashboard/notifications",
-    icon: Bell,
-  },
-  {
-    title: "Settings",
-    href: "/dashboard/settings",
-    icon: Settings,
-  },
+  { title: "Overview", href: "/dashboard", icon: LayoutDashboard },
+  { title: "Legal & Compliance", href: "/dashboard/legal", icon: Scale },
+  { title: "Financial", href: "/dashboard/financial", icon: DollarSign },
+  { title: "Marketing", href: "/dashboard/marketing", icon: TrendingUp },
+  { title: "Team", href: "/dashboard/team", icon: Users },
+  { title: "AI Assistant", href: "/dashboard/ai", icon: MessageSquare },
+  { title: "Mental Health", href: "/dashboard/wellness", icon: Brain },
+  { title: "Network", href: "/dashboard/network", icon: Network },
+  { title: "Notifications", href: "/dashboard/notifications", icon: Bell },
+  { title: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
 
 export default function DashboardSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 border-r bg-white">
-      <div className="flex h-full flex-col">
-        {/* Logo */}
-        <div className="flex h-16 items-center border-b px-6">
-          <Link href="/dashboard" className="flex items-center space-x-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-purple-600">
-              <span className="text-lg font-bold text-white">P</span>
-            </div>
-            <span className="text-xl font-bold text-gray-900">PAROXY</span>
-          </Link>
-        </div>
+    <aside className="hidden w-64 flex-col border-r bg-background lg:flex">
+      {/* Logo */}
+      <div className="flex h-14 items-center border-b px-6">
+        <Link href="/dashboard" className="flex items-center space-x-2">
+          <div className="flex h-7 w-7 items-center justify-center rounded bg-primary">
+            <span className="text-sm font-bold text-primary-foreground">P</span>
+          </div>
+          <span className="text-base font-semibold tracking-tight">Paroxy</span>
+        </Link>
+      </div>
 
-        {/* Navigation */}
-        <nav className="flex-1 space-y-1 overflow-y-auto p-4">
+      {/* Navigation */}
+      <div className="flex-1 overflow-y-auto px-3 py-4">
+        <nav className="flex flex-col space-y-1">
           {navItems.map((item) => {
             const isActive = pathname === item.href;
             const Icon = item.icon;
@@ -96,33 +56,32 @@ export default function DashboardSidebar() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center space-x-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                  "group flex items-center space-x-3 rounded-md px-3 py-2 text-sm font-medium transition-all",
                   isActive
-                    ? "bg-blue-50 text-blue-700"
-                    : "text-gray-700 hover:bg-gray-100"
+                    ? "bg-accent text-accent-foreground"
+                    : "text-muted-foreground hover:bg-accent/50 hover:text-accent-foreground"
                 )}
               >
-                <Icon className="h-5 w-5" />
+                <Icon className={cn("h-4 w-4", isActive ? "text-foreground" : "text-muted-foreground group-hover:text-foreground")} />
                 <span>{item.title}</span>
               </Link>
             );
           })}
         </nav>
+      </div>
 
-        {/* Footer */}
-        <div className="border-t p-4">
-          <div className="rounded-lg bg-gradient-to-br from-blue-600 to-purple-600 p-4 text-white">
-            <p className="text-sm font-semibold">Upgrade to Pro</p>
-            <p className="mt-1 text-xs opacity-90">
-              Unlock all features and unlimited access
-            </p>
-            <button className="mt-3 w-full rounded-md bg-white px-3 py-2 text-xs font-semibold text-blue-600 hover:bg-gray-100">
-              Upgrade Now
-            </button>
-          </div>
+      {/* Footer minimal ad */}
+      <div className="p-4 border-t">
+        <div className="rounded-lg border bg-card p-4 shadow-sm">
+          <p className="text-sm font-medium">Upgrade to Pro</p>
+          <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+            Unlock advanced AI analytics and compliance tracking.
+          </p>
+          <button className="mt-3 w-full rounded-md bg-primary px-3 py-2 text-xs font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90">
+            Upgrade Now
+          </button>
         </div>
       </div>
     </aside>
   );
 }
-

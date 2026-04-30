@@ -1,186 +1,94 @@
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      {/* Navigation */}
-      <nav className="border-b bg-white/50 backdrop-blur-sm">
-        <div className="container mx-auto flex items-center justify-between px-4 py-4">
+    <div className="flex min-h-screen flex-col bg-background">
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container mx-auto flex h-14 items-center justify-between px-4">
           <div className="flex items-center space-x-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-purple-600">
-              <span className="text-xl font-bold text-white">P</span>
+            <div className="flex h-7 w-7 items-center justify-center rounded bg-primary text-xs font-bold text-primary-foreground">
+              P
             </div>
-            <span className="text-2xl font-bold text-gray-900">PAROXY</span>
+            <span className="font-bold tracking-tight">Paroxy</span>
           </div>
-          <div className="flex items-center space-x-4">
+          <nav className="flex items-center gap-4">
             <Link
               href="/signin"
-              className="text-gray-600 hover:text-gray-900"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               Sign In
             </Link>
-            <Link
-              href="/signup"
-              className="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-            >
-              Get Started
-            </Link>
-          </div>
+            <Button asChild size="sm" className="h-8">
+              <Link href="/signup">Get Started</Link>
+            </Button>
+          </nav>
         </div>
-      </nav>
+      </header>
 
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 py-20 text-center">
-        <div className="mx-auto max-w-4xl">
-          <h1 className="mb-6 text-5xl font-bold leading-tight text-gray-900 md:text-6xl">
-            The Ultimate Operating System for{" "}
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Solo Founders
-            </span>
+      <main className="flex-1">
+        <section className="container mx-auto px-4 py-24 md:py-32 lg:py-40 flex flex-col items-center text-center">
+          <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 mb-8">
+            <span className="flex h-2 w-2 rounded-full bg-primary mr-2" />
+            Paroxy 1.0 is now live
+          </div>
+          
+          <h1 className="max-w-[800px] text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+            Startup operations,
+            <br />
+            <span className="text-muted-foreground">simplified.</span>
           </h1>
-          <p className="mb-8 text-xl text-gray-600">
-            From legal compliance to financial management, marketing to mental
-            health—all in one AI-powered platform. Your Founder Twin handles
-            everything so you can focus on building.
+          
+          <p className="mx-auto mt-6 max-w-[600px] text-base text-muted-foreground md:text-lg">
+            An all-in-one legal, financial, and compliance operating system designed 
+            exclusively for fast-moving founders. 
           </p>
-          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link
-              href="/signup"
-              className="rounded-lg bg-blue-600 px-8 py-4 text-lg font-semibold text-white hover:bg-blue-700"
-            >
-              Start Building Now
-            </Link>
-            <Link
-              href="#features"
-              className="rounded-lg border-2 border-gray-300 px-8 py-4 text-lg font-semibold text-gray-700 hover:border-gray-400"
-            >
-              See How It Works
-            </Link>
+          
+          <div className="mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <Button asChild size="lg" className="h-12 px-8">
+              <Link href="/signup">Start for free</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="h-12 px-8">
+              <Link href="/dashboard">View demo</Link>
+            </Button>
           </div>
-        </div>
+        </section>
 
-        {/* Stats */}
-        <div className="mt-20 grid grid-cols-1 gap-8 md:grid-cols-3">
-          <div className="rounded-xl bg-white p-6 shadow-sm">
-            <div className="text-4xl font-bold text-blue-600">10+</div>
-            <div className="mt-2 text-gray-600">Integrated Modules</div>
+        <section className="container mx-auto px-4 py-24 border-t">
+          <div className="grid gap-12 md:grid-cols-3 text-center md:text-left">
+            <div className="space-y-4">
+              <h3 className="text-xl font-semibold">Legal & Compliance</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Generate NDAs, founder agreements, and track your cap table with AI-powered diligence.
+              </p>
+            </div>
+            <div className="space-y-4">
+              <h3 className="text-xl font-semibold">Financial Pulse</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Real-time runway calculations, burn rate analysis, and automated bookkeeping.
+              </p>
+            </div>
+            <div className="space-y-4">
+              <h3 className="text-xl font-semibold">Founder Hub</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Access mental health resources, network with investors, and manage team payroll in one place.
+              </p>
+            </div>
           </div>
-          <div className="rounded-xl bg-white p-6 shadow-sm">
-            <div className="text-4xl font-bold text-purple-600">24/7</div>
-            <div className="mt-2 text-gray-600">AI Assistant</div>
-          </div>
-          <div className="rounded-xl bg-white p-6 shadow-sm">
-            <div className="text-4xl font-bold text-green-600">100%</div>
-            <div className="mt-2 text-gray-600">Founder Focused</div>
-          </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
-      {/* Features Section */}
-      <section id="features" className="bg-white py-20">
-        <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-center text-4xl font-bold text-gray-900">
-            Everything You Need in One Place
-          </h2>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature, idx) => (
-              <div
-                key={idx}
-                className="rounded-xl border border-gray-200 p-6 transition-shadow hover:shadow-lg"
-              >
-                <div className="mb-4 text-4xl">{feature.icon}</div>
-                <h3 className="mb-2 text-xl font-semibold text-gray-900">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-purple-600 py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="mb-6 text-4xl font-bold text-white">
-            Ready to Build Your Dream?
-          </h2>
-          <p className="mb-8 text-xl text-white/90">
-            Join thousands of founders who are building smarter, not harder.
+      <footer className="border-t py-8">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Paroxy Inc. All rights reserved.
           </p>
-          <Link
-            href="/signup"
-            className="inline-block rounded-lg bg-white px-8 py-4 text-lg font-semibold text-blue-600 hover:bg-gray-100"
-          >
-            Get Started Free
-          </Link>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t bg-white py-8">
-        <div className="container mx-auto px-4 text-center text-gray-600">
-          <p>© {new Date().getFullYear()} PAROXY. All rights reserved.</p>
+          <div className="flex gap-4 text-sm text-muted-foreground">
+            <Link href="#" className="hover:text-foreground transition-colors">Privacy</Link>
+            <Link href="#" className="hover:text-foreground transition-colors">Terms</Link>
+          </div>
         </div>
       </footer>
     </div>
   );
 }
-
-const features = [
-  {
-    icon: "⚖️",
-    title: "Legal & Compliance",
-    description:
-      "Auto-generate legal docs, track compliance, and resolve disputes with AI.",
-  },
-  {
-    icon: "💰",
-    title: "Financial Intelligence",
-    description:
-      "Real-time cash flow, automated bookkeeping, and fundraising insights.",
-  },
-  {
-    icon: "📈",
-    title: "Marketing & Growth",
-    description:
-      "Customer acquisition, analytics, and growth strategies powered by AI.",
-  },
-  {
-    icon: "👥",
-    title: "Team Management",
-    description:
-      "Find co-founders, manage equity, and build your dream team.",
-  },
-  {
-    icon: "🤖",
-    title: "AI Founder Twin",
-    description:
-      "Your digital twin that learns your business and automates tasks.",
-  },
-  {
-    icon: "🧠",
-    title: "Mental Health",
-    description:
-      "AI therapist, burnout prevention, and founder well-being support.",
-  },
-  {
-    icon: "🚀",
-    title: "Product Builder",
-    description:
-      "Build MVPs, landing pages, and deploy with integrated no-code tools.",
-  },
-  {
-    icon: "🤝",
-    title: "Smart Networking",
-    description:
-      "Match with investors, mentors, and peers based on your needs.",
-  },
-  {
-    icon: "📊",
-    title: "Real-time Analytics",
-    description:
-      "Track everything that matters with beautiful, actionable dashboards.",
-  },
-];
-
