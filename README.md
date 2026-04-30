@@ -91,4 +91,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - [x] Marketing module
 - [x] Team management
 - [x] Mental health features
-- [ ] Networking platform
+- [x] Networking platform
