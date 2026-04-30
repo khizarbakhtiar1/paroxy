@@ -87,7 +87,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - [x] Dashboard UI
 - [x] Legal module
 - [x] Financial module
-- [ ] AI Assistant
+- [x] AI Assistant
 - [ ] Marketing module
 - [ ] Team management
 - [ ] Mental health features
